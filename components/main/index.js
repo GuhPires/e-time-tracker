@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-import Timer from '../timer';
+import Timer from '../Timer';
 
 export default class Main extends React.Component {
     render(){
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         alignItems: 'center',
-        marginTop: '35%'
+        marginTop: '25%'
     },
     photo: {
         width: 150,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },  
     blockWarpper: {
         width: '80%',
-        marginVertical: 20
+        marginVertical: '6%'
     },
     button: {
         width: '100%',

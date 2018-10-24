@@ -23,16 +23,20 @@ export default class Timer extends React.Component {
 
 const styles = StyleSheet.create({
     timerContainer: {
-       alignItems: 'center',
-       justifyContent: 'center',
-       marginVertical: 20
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: '1%'
     },
     timerWrapper: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: 260,
-        marginVertical: 25
+        height: '20%',
+        width: '82%',
+        marginVertical: '2%',
+        borderWidth: 2,
+        borderColor: 'black'
     },
     timerLabel: {
         fontSize: 18,
