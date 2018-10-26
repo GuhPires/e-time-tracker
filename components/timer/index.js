@@ -30,7 +30,7 @@ export default class Timer extends React.Component {
                 {this.state.moreContent && 
                 <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>      
                     <View style={styles.showMoreBlock}>
-                        <Text style={styles.showMoreLabel}>INTERVAL AT:</Text>
+                        <Text style={styles.showMoreLabel}>INTERVAL:</Text>
                         <Text style={styles.showMoreTime}>HH : MM : SS</Text>
                         <Text style={styles.showMoreLabel}>TO:</Text>
                         <Text style={styles.showMoreTime}>HH : MM : SS</Text>

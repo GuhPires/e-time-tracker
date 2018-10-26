@@ -8,6 +8,11 @@ export default class Main extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.blockData}>
+                    <Text style={styles.intervalLabel}>INTERVAL!</Text>
+                    <View style={styles.rowView}>
+                        <Text style={styles.intervalLabel}>TIME REMAINING:</Text>
+                        <Text style={styles.intervalTime}>HH : MM : SS</Text>
+                    </View>
                     <View style={styles.photo}></View>
                     <TouchableOpacity>
                         <Text style={styles.userData}>Jhon Doe</Text>
@@ -36,12 +41,30 @@ const styles = StyleSheet.create({
     },
     blockData: {
         width: '100%',
+        marginTop: '10%',
         alignItems: 'center'
+    },
+    intervalLabel: {
+        fontSize: 16,
+        color: '#bdbdbd',
+        marginTop: 2
+    },
+    rowView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '80%',
+        marginTop: 10,
+        marginBottom: 15
+        // backgroundColor: 'red' 
+    },
+    intervalTime: {
+        fontSize: 16,
+        color: '#007aff'
     },  
     photo: {
         width: 150,
         height: 150,
-        marginTop: '25%',
         borderWidth: 6,
         borderColor: '#bdbdbd',
         borderRadius: 100,
@@ -55,7 +78,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#bdbdbd',
         marginTop: 2
-    },  
+    },
     blockWarpper: {
         alignItems: 'center',
         width: '100%',
