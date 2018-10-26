@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Timer extends React.Component {
     constructor(props){
@@ -28,7 +28,7 @@ export default class Timer extends React.Component {
                     <Text style={styles.timerTime}>HH : MM : SS</Text>
                 </View>
                 {this.state.moreContent && 
-                <View style={{width: '100%', alignItems: 'center',backgroundColor: 'orange'}}>                    
+                <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>      
                     <View style={styles.showMoreBlock}>
                         <Text style={styles.showMoreLabel}>INTERVAL AT:</Text>
                         <Text style={styles.showMoreTime}>HH : MM : SS</Text>
@@ -45,7 +45,7 @@ export default class Timer extends React.Component {
                     </View>
                 </View>}
                 <TouchableOpacity onPress={this.showMore.bind(this)}>
-                    <Text style={styles.showMore}>SHOW MORE</Text>
+                    <Text style={styles.showMore}>{!this.state.moreContent ? 'SHOW MORE' : 'SHOW LESS'}</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -56,8 +56,7 @@ const styles = StyleSheet.create({
     timerContainer: {
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'green'
+        justifyContent: 'center'
     },
     timerWrapper: {
         flexDirection: 'row',
@@ -77,14 +76,13 @@ const styles = StyleSheet.create({
     showMore: {
         fontSize: 12,
         color: '#007aff',
-        marginTop: 2
+        marginTop: 10
     },
     showMoreBlock: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '96%',
-        paddingVertical: 5,
-        backgroundColor: 'red'
+        paddingVertical: 5
     },  
     showMoreLabel: {
         fontSize: 14,
