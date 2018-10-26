@@ -4,15 +4,31 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Timer from '../Timer';
 
 export default class Main extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            interval: false
+        }
+    }
+
+    toggleInterval(e){
+        e.preventDefault();
+        this.setState({ interval: !this.state.interval });
+    }
+
     render(){
         return (
             <View style={styles.container}>
-                <View style={styles.blockData}>
-                    <Text style={styles.intervalLabel}>INTERVAL!</Text>
-                    <View style={styles.rowView}>
-                        <Text style={styles.intervalLabel}>TIME REMAINING:</Text>
-                        <Text style={styles.intervalTime}>HH : MM : SS</Text>
-                    </View>
+                <View style={!this.state.interval ? styles.blockData : styles.blockDataInterval}>
+                {this.state.interval && 
+                    <React.Fragment>
+                        <Text style={styles.intervalLabel}>INTERVAL!</Text>
+                        <View style={styles.rowView}>
+                            <Text style={styles.intervalLabel}>TIME REMAINING:</Text>
+                            <Text style={styles.intervalTime}>HH : MM : SS</Text>
+                        </View>
+                    </React.Fragment>
+                }
                     <View style={styles.photo}></View>
                     <TouchableOpacity>
                         <Text style={styles.userData}>Jhon Doe</Text>
@@ -24,8 +40,8 @@ export default class Main extends React.Component {
                     <TouchableOpacity style={styles.button} onPress={() => console.log('clicked')}>
                         <Text style={styles.buttonText}>GET TIME</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => console.log('clicked')}>
-                        <Text style={styles.buttonText}>START INTERVAL</Text>
+                    <TouchableOpacity style={styles.button} onPress={this.toggleInterval.bind(this)}>
+                        <Text style={styles.buttonText}>{!this.state.interval ? 'START INTERVAL' : 'FINISH INTERVAL'}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -41,7 +57,12 @@ const styles = StyleSheet.create({
     },
     blockData: {
         width: '100%',
-        marginTop: '10%',
+        marginTop: '30%',
+        alignItems: 'center'
+    },
+    blockDataInterval: {
+        width: '100%',
+        marginTop: '12%',
         alignItems: 'center'
     },
     intervalLabel: {
@@ -56,7 +77,6 @@ const styles = StyleSheet.create({
         width: '80%',
         marginTop: 10,
         marginBottom: 15
-        // backgroundColor: 'red' 
     },
     intervalTime: {
         fontSize: 16,

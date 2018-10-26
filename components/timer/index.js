@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '82%',
-        marginVertical: '2%'
+        marginVertical: '5%'
     },
     timerLabel: {
         fontSize: 18,
