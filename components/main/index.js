@@ -1,28 +1,46 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 
 import Timer from '../Timer';
 
+const { height, width } = Dimensions.get('window');
+
 export default class Main extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            screenH: 0
+        }
+    }
+
+    onContentSizeChange = (contentWidth, contentHeight) => {
+        this.setState({ screenH: contentHeight });
+    }
+
     render(){
+        console.log('Device Heigh: ', height, ' Device Width: ', width, ' State: ', this.state.screenH);
+        const scrollEnabled = this.state.screenH > height;
+        // const scrollEnabled = false;
         return (
             <SafeAreaView style={styles.container}>
-                <View style={styles.blockData}>
-                    <View style={styles.photo}></View>
-                    <TouchableOpacity>
-                        <Text style={styles.userData}>Jhon Doe</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.dateLabel}>{new Date().toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'})}</Text>
-                </View>
-                <Timer/>
-                <View style={styles.blockWarpper}>
-                    <TouchableOpacity style={styles.button} onPress={() => console.log('clicked')}>
-                        <Text style={styles.buttonText}>GET TIME</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => console.log('clicked')}>
-                        <Text style={styles.buttonText}>START INTERVAL</Text>
-                    </TouchableOpacity>
-                </View>
+                <ScrollView style={{flex: 1}} scrollEnabled={scrollEnabled} onContentSizeChange={this.onContentSizeChange}>
+                    <View style={styles.blockData}>
+                        <View style={styles.photo}></View>
+                        <TouchableOpacity>
+                            <Text style={styles.userData}>Jhon Doe</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.dateLabel}>{new Date().toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'})}</Text>
+                    </View>
+                    <Timer/>
+                    <View style={styles.blockWarpper}>
+                        <TouchableOpacity style={styles.button} onPress={() => console.log('clicked')}>
+                            <Text style={styles.buttonText}>GET TIME</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => console.log('clicked')}>
+                            <Text style={styles.buttonText}>START INTERVAL</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </SafeAreaView>
         )
     }
