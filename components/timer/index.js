@@ -28,7 +28,7 @@ export default class Timer extends React.Component {
                     <Text style={styles.timerTime}>HH : MM : SS</Text>
                 </View>
                 {this.state.moreContent && 
-                <ScrollView style={{width: '100%', backgroundColor: 'orange'}} contentContainerStyle={{flexGrow: 1}}>                    
+                <View style={{width: '100%', alignItems: 'center',backgroundColor: 'orange'}}>                    
                     <View style={styles.showMoreBlock}>
                         <Text style={styles.showMoreLabel}>INTERVAL AT:</Text>
                         <Text style={styles.showMoreTime}>HH : MM : SS</Text>
@@ -43,7 +43,7 @@ export default class Timer extends React.Component {
                         <Text style={styles.showMoreLabel}>TOTAL WORKED HOURS:</Text>
                         <Text style={styles.showMoreTime}>HH : MM : SS</Text>
                     </View>
-                </ScrollView>}
+                </View>}
                 <TouchableOpacity onPress={this.showMore.bind(this)}>
                     <Text style={styles.showMore}>SHOW MORE</Text>
                 </TouchableOpacity>
@@ -54,14 +54,12 @@ export default class Timer extends React.Component {
 
 const styles = StyleSheet.create({
     timerContainer: {
-        flex: 1,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'green'
     },
     timerWrapper: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -82,9 +80,10 @@ const styles = StyleSheet.create({
         marginTop: 2
     },
     showMoreBlock: {
-        flex: 2,
         flexDirection: 'row',
-        width: '80%',
+        justifyContent: 'space-between',
+        width: '96%',
+        paddingVertical: 5,
         backgroundColor: 'red'
     },  
     showMoreLabel: {

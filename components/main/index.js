@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     blockData: {
-        flex: 2, 
         width: '100%',
         alignItems: 'center'
     },  
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
         marginTop: 2
     },  
     blockWarpper: {
-        flex: 1,
         alignItems: 'center',
         width: '100%',
         paddingVertical: '6%'
