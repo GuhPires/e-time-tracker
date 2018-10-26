@@ -7,8 +7,39 @@ export default class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            arrivingTime: '',
+            leavingTime: '',
+            calculatedTime: '',
             interval: false
         }
+    }
+
+    getTime(e){
+        e.preventDefault();
+        let from = 'arrivingTime';
+        if(this.state.arrivingTime){
+          from = 'leavingTime';
+        }
+        this.setState({
+          [from]: Date.now()
+        }, () => this.calculateTime());
+      }
+
+    calculateTime(){
+        if(!this.state.leavingTime){
+          return ;
+        }
+        let diff = (this.state.leavingTime - this.state.arrivingTime);
+        console.log('Diff: ', diff);
+        let hours = parseInt(diff / 3600000);
+        diff = diff % 3600000;
+        console.log('Hours: ', hours, ' Diff: ', diff);
+        let minutes = parseInt(diff / 60000);
+        diff = diff % 60000;
+        console.log('Minutes: ', minutes, ' Diff: ', diff);
+        let seconds = Math.round(parseInt(diff / 1000));
+        console.log('Seconds: ', seconds, ' Diff: ', diff);
+        this.setState({ calculatedTime: `${hours.toString().padStart(2,0)}h : ${minutes.toString().padStart(2,0)}min : ${seconds.toString().padStart(2,0)}sec` });
     }
 
     toggleInterval(e){
@@ -35,9 +66,9 @@ export default class Main extends React.Component {
                     </TouchableOpacity>
                     <Text style={styles.dateLabel}>{new Date().toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'})}</Text>
                 </View>
-                <Timer/>
+                <Timer arrivingTime={this.state.arrivingTime} leavingTime={this.state.leavingTime} calculatedTime={this.state.calculatedTime}/>
                 <View style={styles.blockWarpper}>
-                    <TouchableOpacity style={styles.button} onPress={() => console.log('clicked')}>
+                    <TouchableOpacity style={styles.button} onPress={this.getTime.bind(this)} disabled={!!this.state.leavingTime}>
                         <Text style={styles.buttonText}>GET TIME</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={this.toggleInterval.bind(this)}>

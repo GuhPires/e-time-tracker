@@ -21,11 +21,11 @@ export default class Timer extends React.Component {
             <View style={styles.timerContainer}>
                 <View style={styles.timerWrapper}>
                     <Text style={styles.timerLabel}>ARRIVED AT:</Text>
-                    <Text style={styles.timerTime}>HH : MM : SS</Text>
+                    <Text style={styles.timerTime}>{this.props.arrivingTime ? new Date(this.props.arrivingTime).toLocaleTimeString() : 'HH : MM : SS'}</Text>
                 </View>
                 <View style={styles.timerWrapper}>
                     <Text style={styles.timerLabel}>LEFT AT:</Text>
-                    <Text style={styles.timerTime}>HH : MM : SS</Text>
+                    <Text style={styles.timerTime}>{this.props.leavingTime ? new Date(this.props.leavingTime).toLocaleTimeString() : 'HH : MM : SS'}</Text>
                 </View>
                 {this.state.moreContent && 
                 <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>      
@@ -41,7 +41,7 @@ export default class Timer extends React.Component {
                     </View>
                     <View style={styles.showMoreBlock}>
                         <Text style={styles.showMoreLabel}>TOTAL WORKED HOURS:</Text>
-                        <Text style={styles.showMoreTime}>HH : MM : SS</Text>
+                        <Text style={styles.showMoreTime}>{this.props.calculatedTime ? this.props.calculatedTime : 'HH : MM : SS'}</Text>
                     </View>
                 </View>}
                 <TouchableOpacity onPress={this.showMore.bind(this)}>
