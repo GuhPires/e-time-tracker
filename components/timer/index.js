@@ -37,7 +37,7 @@ export default class Timer extends React.Component {
                     </View>
                     <View style={styles.showMoreBlock}>
                         <Text style={styles.showMoreLabel}>TOTAL INTERVAL TIME:</Text>
-                        <Text style={styles.showMoreTime}>HH : MM : SS</Text>
+                        <Text style={styles.showMoreTime}>{this.props.calculatedIntervalTime ? this.props.calculatedIntervalTime : 'HH : MM : SS'}</Text>
                     </View>
                     <View style={styles.showMoreBlock}>
                         <Text style={styles.showMoreLabel}>TOTAL WORKED HOURS:</Text>

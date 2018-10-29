@@ -6,10 +6,16 @@ import Timer from '../Timer';
 export default class Main extends React.Component {
     constructor(props){
         super(props);
+
+        this.INIT_INTERVAL = 3600000;    // 1 hour in mlliseconds
+
         this.state = {
             arrivingTime: '',
             leavingTime: '',
             calculatedTime: '',
+            intervalTime: this.INIT_INTERVAL,           
+            showInterval: this.calculateTime(this.INIT_INTERVAL),
+            calculatedIntervalTime: '',
             interval: false
         }
     }
@@ -22,29 +28,38 @@ export default class Main extends React.Component {
         }
         this.setState({
           [from]: Date.now()
-        }, () => this.calculateTime());
+        }, () => {
+            if(!this.state.leavingTime){
+                return ;
+            }
+            let diff = ((this.state.leavingTime - this.state.arrivingTime) - (this.INIT_INTERVAL - this.state.intervalTime));
+            this.setState({ calculatedTime:  this.calculateTime(diff)});
+        });
       }
 
-    calculateTime(){
-        if(!this.state.leavingTime){
-          return ;
-        }
-        let diff = (this.state.leavingTime - this.state.arrivingTime);
-        console.log('Diff: ', diff);
-        let hours = parseInt(diff / 3600000);
-        diff = diff % 3600000;
-        console.log('Hours: ', hours, ' Diff: ', diff);
+    calculateTime(time){
+        // console.log('Time: ', time);
+        let hours = parseInt(time / 3600000);
+        let diff = time % 3600000;
+        // console.log('Hours: ', hours, ' Diff: ', diff);
         let minutes = parseInt(diff / 60000);
         diff = diff % 60000;
-        console.log('Minutes: ', minutes, ' Diff: ', diff);
+        // console.log('Minutes: ', minutes, ' Diff: ', diff);
         let seconds = Math.round(parseInt(diff / 1000));
-        console.log('Seconds: ', seconds, ' Diff: ', diff);
-        this.setState({ calculatedTime: `${hours.toString().padStart(2,0)}h : ${minutes.toString().padStart(2,0)}min : ${seconds.toString().padStart(2,0)}sec` });
+        // console.log('Seconds: ', seconds, ' Diff: ', diff);
+        return `${hours.toString().padStart(2,0)}h : ${minutes.toString().padStart(2,0)}min : ${seconds.toString().padStart(2,0)}sec`;
     }
 
     toggleInterval(e){
         e.preventDefault();
-        this.setState({ interval: !this.state.interval });
+        this.setState({ interval: !this.state.interval }, () => {
+            if(this.state.interval){
+                this.intervalTick = setInterval(() => this.setState({ intervalTime: this.state.intervalTime - 1000, showInterval: this.calculateTime(this.state.intervalTime - 1000) }), 1000);
+            } else {
+                clearInterval(this.intervalTick);
+                this.setState({ calculatedIntervalTime: this.calculateTime(this.INIT_INTERVAL - this.state.intervalTime) })
+            }
+        });
     }
 
     render(){
@@ -56,7 +71,7 @@ export default class Main extends React.Component {
                         <Text style={styles.intervalLabel}>INTERVAL!</Text>
                         <View style={styles.rowView}>
                             <Text style={styles.intervalLabel}>TIME REMAINING:</Text>
-                            <Text style={styles.intervalTime}>HH : MM : SS</Text>
+                            <Text style={styles.intervalTime}>{this.state.showInterval}</Text>
                         </View>
                     </React.Fragment>
                 }
@@ -66,7 +81,9 @@ export default class Main extends React.Component {
                     </TouchableOpacity>
                     <Text style={styles.dateLabel}>{new Date().toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'})}</Text>
                 </View>
-                <Timer arrivingTime={this.state.arrivingTime} leavingTime={this.state.leavingTime} calculatedTime={this.state.calculatedTime}/>
+                
+                <Timer arrivingTime={this.state.arrivingTime} leavingTime={this.state.leavingTime} calculatedTime={this.state.calculatedTime} calculatedIntervalTime={this.state.calculatedIntervalTime}/>
+                
                 <View style={styles.blockWarpper}>
                     <TouchableOpacity style={styles.button} onPress={this.getTime.bind(this)} disabled={!!this.state.leavingTime}>
                         <Text style={styles.buttonText}>GET TIME</Text>
