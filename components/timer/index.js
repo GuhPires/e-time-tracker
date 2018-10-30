@@ -28,13 +28,7 @@ export default class Timer extends React.Component {
                     <Text style={styles.timerTime}>{this.props.leavingTime ? new Date(this.props.leavingTime).toLocaleTimeString() : 'HH : MM : SS'}</Text>
                 </View>
                 {this.state.moreContent && 
-                <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>      
-                    <View style={styles.showMoreBlock}>
-                        <Text style={styles.showMoreLabel}>INTERVAL:</Text>
-                        <Text style={styles.showMoreTime}>HH : MM : SS</Text>
-                        <Text style={styles.showMoreLabel}>TO:</Text>
-                        <Text style={styles.showMoreTime}>HH : MM : SS</Text>
-                    </View>
+                <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>
                     <View style={styles.showMoreBlock}>
                         <Text style={styles.showMoreLabel}>TOTAL INTERVAL TIME:</Text>
                         <Text style={styles.showMoreTime}>{this.props.calculatedIntervalTime ? this.props.calculatedIntervalTime : 'HH : MM : SS'}</Text>

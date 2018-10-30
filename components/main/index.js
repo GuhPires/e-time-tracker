@@ -88,7 +88,7 @@ export default class Main extends React.Component {
                     <TouchableOpacity style={styles.button} onPress={this.getTime.bind(this)} disabled={!!this.state.leavingTime}>
                         <Text style={styles.buttonText}>GET TIME</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={this.toggleInterval.bind(this)}>
+                    <TouchableOpacity style={styles.button} onPress={this.toggleInterval.bind(this)} disabled={!!this.state.leavingTime || !this.state.arrivingTime}>
                         <Text style={styles.buttonText}>{!this.state.interval ? 'START INTERVAL' : 'FINISH INTERVAL'}</Text>
                     </TouchableOpacity>
                 </View>
